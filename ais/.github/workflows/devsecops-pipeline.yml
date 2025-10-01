@@ -1,0 +1,72 @@
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 3 * * *'
+
+jobs:
+  dependabot:
+      name: Dependabot Dependency Updates
+      if: github.actor == 'dependabot[bot]'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+  
+        - name: Fetch Dependabot Metadata
+          uses: dependabot/fetch-metadata@v1
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  snyk:
+    name: Snyk Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+        
+      - name: Authenticate Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      - name: Snyk Test for Vulnerabilities
+        run: snyk test
+
+      - name: Snyk Monitor Project
+        run: snyk monitor
+
+  sonarcloud:
+    name: SonarCloud Code Quality and Security Analysis
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Run SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v4.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.token=${SONAR_TOKEN}
+            -Dsonar.projectKey=fifa-um-si_ais-project-poc
+            -Dsonar.organization=fifa-um-si
+            -Dsonar.host.url=https://sonarcloud.io
