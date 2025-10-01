@@ -1,0 +1,57 @@
+I have prepared a template in Java to help you get started with the first task. Your task is to implement all the missing code and solve all the specified
+problems. The best way to test if the fitness function is correctly implemented is to call it with the global optimum x* and check if the fitness is the
+same as f(x*). All information regarding the problems is available at the provided links.
+
+The problems you need to implement are as follows:
+
+Sphere Lb=[-100 -10 -100 -10...] Ub=[100, 10, 100, 10...]
+
+https://www.sfu.ca/~ssurjano/spheref.html
+
+Ackley Lb= -32.768 Ub= 32.768
+
+https://www.sfu.ca/~ssurjano/ackley.html
+
+Griewank Lb=-600 Ub=600
+
+https://www.sfu.ca/~ssurjano/griewank.html
+
+Rastrigin Lb=-5.12 Ub=5.12
+
+https://www.sfu.ca/~ssurjano/rastr.html
+
+Schwefel26 Lb=-500 Ub=500
+
+https://al-roomi.org/benchmarks/unconstrained/n-dimensions/176-generalized-schwefel-s-problem-2-26
+
+Rosenbrock Lb=-5 Ub=10
+
+https://www.sfu.ca/~ssurjano/rosen.html
+
+Trid Lb=-n^2 Ub=n^2 //n is number of dimensions
+
+https://www.sfu.ca/~ssurjano/trid.html
+
+Bukin Lb=[-15 -3] Ub=[-5 3]
+
+https://www.sfu.ca/~ssurjano/bukin6.html
+
+Carrom Table Lb=-10 Ub=10
+
+https://infinity77.net/global_optimization/test_functions_nd_C.html
+
+Styblinski-Tang Lb=-5 Ub=5
+
+https://www.sfu.ca/~ssurjano/stybtang.html
+
+Levy Lb=-10 Ub=10
+
+https://www.sfu.ca/~ssurjano/levy.html
+
+Michalewicz Lb=0 Ub=PI
+
+https://www.sfu.ca/~ssurjano/michal.html
+
+Use the provided lower and upper bounds!
+
+Please share this with classmates who do not have access to MS Teams.

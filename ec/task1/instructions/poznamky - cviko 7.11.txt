@@ -1,0 +1,33 @@
+lower a upper bound jsou a arraye
+
+Sphere -> muze jit az do n dimenzi
+
+Schwefel -> minimum ma na konci n, takze to odpovida poctu n! -418.98 neco krat n
+
+---
+verifikace spravnosti implementace: 
+vypocitam f(x) jako fitness funkcni optimalnich cisel
+vypocitam f(x) svy funkce
+pak to odectu
+spocitam absolutni hodnotu
+
+a pokud rozdi lje mensi nez 10e^-7, je to OK 
+kdyz neni tak to nebude 
+
+testy pro 2,5 a 10 dimesni (krome burkina)
+
+---
+mozna zkusit naimplementovat jinak ten random algoritmus podle jeho kodu? 
+
+---
+vsechny tasky jso una minimalizaci
+
+--- pro nas bude stopping criteria neco jinyho nez pocet iteraci: 
+bude to maxFes coz je maximal fitness function? 
+
+
+--- pridat isDebug parmaetr abychom pak videli nove lepsi hodnoty a tak
+
+--- 
+mensi toleranci pro stablinkseho muze byt? 
+--> bude jiny link pro michalwicz

@@ -1,0 +1,83 @@
+# EC Task 1
+
+### Author
+- **Name**: Filip Pospisil
+- **Email**: filip.pospisil@student.um.si
+
+---
+
+### Prerequisites
+- Java
+- Shell
+
+---
+
+### Basic Commands
+
+#### Run
+This task will compile code and run all implemented algorhitms in 2, 5 and 10 dimensions (if possible). Default maxFest is 3000*number of dimensions.  
+```shell
+./run_task1.sh
+```
+
+Example: 
+```shell
+Run - 2 dimensions
+Sphere: [-0.23292222803080165, 0.037135385006365595]
+Ackley: [0.1343566550661066, -0.12810761097556878]
+Griewank: [-0.388858043981827, -26.8172962098879]
+Rastrigin: [0.9556487694641067, -0.006971179344204437]
+Schwefel26: [420.1348969523691, 418.94914152928266]
+Rosenbrock: [1.0816001741035821, 1.2038712726578824]
+Trid: [0.9564556513783833, 0.9835922884163297]
+Bukin: [-8.882036228518233, 0.7895520794725579]
+Carrom Table: [-9.574590135014969, -9.608836437985659]
+Styblinski-Tang: [-2.961630341318994, -2.9552177491585594]
+Levy: [1.0439793454773003, 0.8464565950994025]
+Michalewicz: [2.2125347511119946, 1.5852109363135543]
+```
+
+#### Debug
+Will run all implemented algothitms but will write to stdout everytime better solution is found. 
+```shell
+./run_task1.sh debug
+```
+Example: 
+```shell
+1: x=[20.989411654980287, 5.0232478851552145] = 19.072303417585754
+4: x=[-7.604686115133234, -6.0822958123127755] = 16.632573490937727
+5: x=[-4.447957291465428, -6.673940473290983] = 15.790127485370064
+25: x=[-5.279828657462378, -4.9045493967505465] = 14.123547697590588
+40: x=[4.802704167258746, 0.4846291259865225] = 11.897535537452974
+54: x=[0.677915581812627, 3.268380281894352] = 9.485418860977042
+101: x=[1.8144239442168626, -1.354350209431125] = 7.300510083620602
+106: x=[2.152663097796321, 0.06464510365300669] = 5.860073172992867
+147: x=[-0.2974238749310203, -1.4065749396334652] = 5.82846532081328
+516: x=[-0.5858601471328129, 0.9741307210220072] = 4.62178537032515
+1058: x=[1.0746127421586067, -1.0736225623671416] = 4.140925813034223
+3298: x=[-0.7779171345370415, 0.30190982170307734] = 4.014869405723791
+Ackley: [-0.7779171345370415, 0.30190982170307734]
+```
+
+#### Tests
+Will run all implemented Unit tests - for 2, 5 and 10 dimensions. (If possible.)
+```shell
+./run_task1.sh test
+```
+Example: 
+```shell
+Unit tests - 2 dimensions
+Sphere: 0.0, expected: 0.0; diff: 0.0, passed
+Ackley: 8.881784197001252E-16, expected: 0.0; diff: 8.881784197001252E-16, passed
+Griewank: 0.0, expected: 0.0; diff: 0.0, passed
+Rastrigin: 0.0, expected: 0.0; diff: 0.0, passed
+Schwefel26: -837.965774544325, expected: -837.9657745448676; diff: 5.426272764452733E-10, passed
+Rosenbrock: 0.0, expected: 0.0; diff: 0.0, passed
+Trid: 0.0, expected: 0.0; diff: 0.0, passed
+Bukin: 0.0, expected: 0.0; diff: 0.0, passed
+Carrom Table: -24.15560756432766, expected: -24.15681551650653; diff: 0.001207952178869931, failed
+Styblinski-Tang: -78.33233140754282, expected: -78.33233140754284; diff: 1.4210854715202004E-14, passed
+Levy: 1.4997597826618576E-32, expected: 0.0; diff: 1.4997597826618576E-32, passed
+Michalewicz: -1.8013034100985532, expected: -1.8013034100985532; diff: 0.0, passed
+Passed 11 tests out of 12
+```
