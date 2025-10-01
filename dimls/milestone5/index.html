@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warranty Claim Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center">Warranty Claim Prediction</h1>
+        <div class="text-center mt-3">
+            <button id="prefill1" class="btn btn-secondary">Fraud</button>
+            <button id="prefill2" class="btn btn-secondary">Non Fraud</button>
+        </div>
+        <form id="claimForm" class="mt-4">
+            <div class="row">
+                <!-- Column 1 -->
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="area" class="form-label">Area</label>
+                        <select id="area" class="form-select" required>
+                            <option value="" selected disabled>Choose an area</option>
+                            <option value="Rural">Rural</option>
+                            <option value="Urban">Urban</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="consumer_profile" class="form-label">Consumer Profile</label>
+                        <select id="consumer_profile" class="form-select" required>
+                            <option value="" selected disabled>Choose a profile</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Business">Business</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_category" class="form-label">Product Category</label>
+                        <select id="product_category" class="form-select" required>
+                            <option value="" selected disabled>Choose a category</option>
+                            <option value="Household">Household</option>
+                            <option value="Entertainment">Entertainment</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_type" class="form-label">Product Type</label>
+                        <select id="product_type" class="form-select" required>
+                            <option value="" selected disabled>Choose a type</option>
+                            <option value="AC">AC</option>
+                            <option value="TV">TV</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="claim_value" class="form-label">Claim Value</label>
+                        <input type="number" step="0.01" id="claim_value" class="form-control" required>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="product_age" class="form-label">Product Age (in months)</label>
+                        <input type="number" step="1" id="product_age" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="call_details" class="form-label">Call Details</label>
+                        <input type="number" step="1" id="call_details" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="service_centre" class="form-label">Service Centre</label>
+                        <input type="number" step="0.01" id="service_centre" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="purchased_from" class="form-label">Purchased From</label>
+                        <select id="purchased_from" class="form-select" required>
+                            <option value="" selected disabled>Choose a source</option>
+                            <option value="Manufacturer">Manufacturer</option>
+                            <option value="Dealer">Dealer</option>
+                            <option value="Internet">Internet</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="purpose" class="form-label">Purpose</label>
+                        <select id="purpose" class="form-select" required>
+                            <option value="" selected disabled>Choose a purpose</option>
+                            <option value="Claim">Claim</option>
+                            <option value="Complaint">Complaint</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="AC_1001_Issue" class="form-label">AC_1001 Issue</label>
+                        <input type="number" id="AC_1001_Issue" step="0.01" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="AC_1002_Issue" class="form-label">AC_1002 Issue</label>
+                        <input type="number" id="AC_1002_Issue" step="0.01" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="AC_1003_Issue" class="form-label">AC_1003 Issue</label>
+                        <input type="number" id="AC_1003_Issue" step="0.01" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="TV_2001_Issue" class="form-label">TV_2001 Issue</label>
+                        <input type="number" id="TV_2001_Issue" step="0.01" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="TV_2002_Issue" class="form-label">TV_2002 Issue</label>
+                        <input type="number" id="TV_2002_Issue" step="0.01" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="TV_2003_Issue" class="form-label">TV_2003 Issue</label>
+                        <input type="number" id="TV_2003_Issue" step="0.01" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <div id="result" class="mt-4 alert d-none"></div>
+    </div>
+
+    <script>
+        document.getElementById('prefill1').addEventListener('click', function () {
+            document.getElementById('area').value = 'Urban';
+            document.getElementById('consumer_profile').value = 'Business';
+            document.getElementById('product_category').value = 'Entertainment';
+            document.getElementById('product_type').value = 'TV';
+            document.getElementById('claim_value').value = 15000.0;
+            document.getElementById('product_age').value = 12.0;
+            document.getElementById('call_details').value = 4.0;
+            document.getElementById('service_centre').value = 1.6;
+            document.getElementById('purchased_from').value = 'Manufacturer';
+            document.getElementById('purpose').value = 'Complaint';
+            document.getElementById('AC_1001_Issue').value = 0.0;
+            document.getElementById('AC_1002_Issue').value = 0.0;
+            document.getElementById('AC_1003_Issue').value = 0.0;
+            document.getElementById('TV_2001_Issue').value = 1.0;
+            document.getElementById('TV_2002_Issue').value = 1.0;
+            document.getElementById('TV_2003_Issue').value = 1.0;
+        });
+
+        document.getElementById('prefill2').addEventListener('click', function () {
+            document.getElementById('area').value = 'Urban';
+            document.getElementById('consumer_profile').value = 'Personal';
+            document.getElementById('product_category').value = 'Household';
+            document.getElementById('product_type').value = 'AC';
+            document.getElementById('claim_value').value = 4832.0;
+            document.getElementById('product_age').value = 481.0;
+            document.getElementById('call_details').value = 30.0;
+            document.getElementById('service_centre').value = 14.0;
+            document.getElementById('purchased_from').value = 'Internet';
+            document.getElementById('purpose').value = 'Complaint';
+            document.getElementById('AC_1001_Issue').value = 0.0;
+            document.getElementById('AC_1002_Issue').value = 2.0;
+            document.getElementById('AC_1003_Issue').value = 0.0;
+            document.getElementById('TV_2001_Issue').value = 0.0;
+            document.getElementById('TV_2002_Issue').value = 0.0;
+            document.getElementById('TV_2003_Issue').value = 0.0;
+        });
+
+        document.getElementById('claimForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const data = {
+                Area: document.getElementById('area').value,
+                Consumer_profile: document.getElementById('consumer_profile').value,
+                Product_category: document.getElementById('product_category').value,
+                Product_type: document.getElementById('product_type').value,
+                Claim_Value: parseFloat(document.getElementById('claim_value').value),
+                Product_Age: parseFloat(document.getElementById('product_age').value),
+                Call_details: parseFloat(document.getElementById('call_details').value),
+                Service_Centre: parseFloat(document.getElementById('service_centre').value),
+                Purchased_from: document.getElementById('purchased_from').value,
+                Purpose: document.getElementById('purpose').value,
+                AC_1001_Issue: parseFloat(document.getElementById('AC_1001_Issue').value),
+                AC_1002_Issue: parseFloat(document.getElementById('AC_1002_Issue').value),
+                AC_1003_Issue: parseFloat(document.getElementById('AC_1003_Issue').value),
+                TV_2001_Issue: parseFloat(document.getElementById('TV_2001_Issue').value),
+                TV_2002_Issue: parseFloat(document.getElementById('TV_2002_Issue').value),
+                TV_2003_Issue: parseFloat(document.getElementById('TV_2003_Issue').value),
+            };
+
+            const apiUrl = 'http://localhost:5000/predict';
+
+            try {
+                const response = await axios.post(apiUrl, data);
+                const { fraud_probability } = response.data;
+
+                const resultDiv = document.getElementById('result');
+                resultDiv.classList.remove('d-none', 'alert-success', 'alert-danger');
+
+                if (fraud_probability < 0.5) {
+                    resultDiv.classList.add('alert-success');
+                    resultDiv.textContent = `Low Fraud Risk (Probability: ${fraud_probability.toFixed(2)})`;
+                } else {
+                    resultDiv.classList.add('alert-danger');
+                    resultDiv.textContent = `High Fraud Risk (Probability: ${fraud_probability.toFixed(2)})`;
+                }
+            } catch (error) {
+                alert('Error submitting data. Please try again.');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
